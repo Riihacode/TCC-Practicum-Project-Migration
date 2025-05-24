@@ -1,5 +1,5 @@
 FROM node:20-alpine
-COPY .env .env
+COPY cat .env
 COPY package.json .
 WORKDIR /app
 COPY . .
