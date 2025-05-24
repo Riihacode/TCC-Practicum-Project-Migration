@@ -55,20 +55,21 @@ steps:
     # dir: "notes_be"
     dir: "tugas2/backend_api"
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/notes-backend:${SHORT_SHA}", "."]
+    # args: ["build", "-t", "gcr.io/$PROJECT_ID/notes-backend:${SHORT_SHA}", "."]
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/backend-api-task7-123210038:${SHORT_SHA}", "."]
     # dir: "notes_be"
     dir: "tugas2/backend_api"
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/notes-backend:${SHORT_SHA}"]
+    args: ["push", "gcr.io/$PROJECT_ID/backend-api-task7-123210038:${SHORT_SHA}"]
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: gcloud
     args:
       [
         "run",
         "deploy",
-        "notes-backend",
+        "backend-api-task7-123210038",
         "--image",
-        "gcr.io/$PROJECT_ID/notes-backend:${SHORT_SHA}",
+        "gcr.io/$PROJECT_ID/backend-api-task7-123210038:${SHORT_SHA}",
         "--timeout",
         "1000s",
         "--port",
