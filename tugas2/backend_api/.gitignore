@@ -1,0 +1,4 @@
+.env
+node_modules
+tcc_practicum_task2.sql
+request.rest

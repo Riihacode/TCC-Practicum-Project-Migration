@@ -1,0 +1,58 @@
+# steps:
+#   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+#     entrypoint: "bash"
+#     args:
+#       [
+#         "-c",
+#         "gcloud config set app/cloud_build_timeout 1600 && gcloud app deploy",
+#       ]
+#     dir: tugas2/frontend_web  # agar app.yaml bisa dibaca
+
+# timeout: "1600s"
+
+# options:
+#   logging: CLOUD_LOGGING_ONLY
+
+
+
+steps:
+  # Step 1: Install dependencies
+  - name: "gcr.io/cloud-builders/npm"
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        if [ ! -d "node_modules" ]; then
+          echo "Installing dependencies..."
+          npm ci
+        else
+          echo "Skipping npm install, node_modules exists."
+        fi
+    # dir: "notes_fe"
+    dir: "tugas2/frontend_web"
+    volumes:
+      - name: "npm-cache"
+        path: /root/.npm
+
+  # Step 2: Build frontend 
+  - name: "gcr.io/cloud-builders/npm"
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        npm run build
+    # dir: "notes_fe"
+    dir: "tugas2/frontend_web"
+    volumes:
+      - name: "npm-cache"
+        path: /root/.npm
+
+  # Step 3: Deploy ke App Engine
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args: ["app", "deploy", "--quiet"]
+    # dir: "notes_fe"
+    dir: "tugas2/frontend_web"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
