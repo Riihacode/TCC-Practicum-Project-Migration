@@ -1,8 +1,7 @@
 // const BASE_URL = "http://localhost:5000";
 //const BASE_URL = "https://backend-api-136536138076.us-central1.run.app";
 // const BASE_URL = "https://backend-api-prak-tcc-task6-136536138076.us-central1.run.app";
-// const BASE_URL = "https://backend-api-task7-123210038-136536138076.us-central1.run.app";
-const BASE_URL = "https://g-05-450802.uc.r.appspot.com/";
+const BASE_URL = "https://backend-api-task7-123210038-136536138076.us-central1.run.app";
 
 // Register
 document.getElementById("registerForm")?.addEventListener("submit", function (e) {
